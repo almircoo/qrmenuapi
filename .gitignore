@@ -11,3 +11,4 @@ wheels/
 .git/
 db.sqlite3
 .env.env
+.env
