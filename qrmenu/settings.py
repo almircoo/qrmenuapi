@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     "core",
     #external app
     "djoser",
+    'drf_yasg',
     "rest_framework",
     "rest_framework.authtoken"
 ]
