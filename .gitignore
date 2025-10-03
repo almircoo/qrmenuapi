@@ -10,4 +10,4 @@ wheels/
 .venv
 .git/
 db.sqlite3
-.env
+.env.env
