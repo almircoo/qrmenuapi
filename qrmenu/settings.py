@@ -34,10 +34,11 @@ INSTALLED_APPS = [
     #local apps
     "core",
     #external app
-    "djoser",
-    'drf_yasg',
     "rest_framework",
-    "rest_framework.authtoken"
+    "rest_framework.authtoken",
+    "djoser",
+    "corsheaders",
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -127,3 +128,9 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     )
 }
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",  # React dev server
+    "http://127.0.0.1:3000",
+    # Agregar tu dominio de producción
+]
