@@ -27,7 +27,7 @@ class MenuItem(models.Model):
   category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="menu_items")
   name = models.CharField(max_length=255)
   description = models.TextField(blank=True)
-  price = models.IntegerField(default=0)
+  price = models.FloatField(default=0)
   image = models.CharField(max_length=255)
   is_available = models.BooleanField(default=True)
 
