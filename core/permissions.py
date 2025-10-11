@@ -22,28 +22,31 @@ class PlaceOwnerOrReadOnly(permissions.BasePermission):
     # Permisos de escritura solo permitidos al dueño del place relacionado.
     # Esto funciona para Category y MenuItem
     try:
-      return obj.place.owner == request.user
+        return obj.place.owner == request.user
     except AttributeError:
-      # Manejar si el objeto no tiene el atributo 'place' directamente
-      return False
+        # Manejar si el objeto no tiene el atributo 'place' directamente
+        return False
 
   def has_permission(self, request, view):
     if request.method in permissions.SAFE_METHODS:
-      return True # Permite la lectura (GET, HEAD, OPTIONS)
-      
-    # Solo procedemos con la lógica de verificación si es una solicitud de escritura (POST, etc.)
+        return True # Permite la lectura (GET, HEAD, OPTIONS)
+    
+    if request.method in ['PUT', 'PATCH', 'DELETE']:
+        # Solo exigimos que el usuario esté autenticado.
+        return request.user and request.user.is_authenticated
+    # Solo procedemos con la lógica de verificación si es una solicitud de escritura 
     if not request.user or not request.user.is_authenticated:
-      return False # No autenticado
+        return False # No autenticado
 
     # Para acciones de POST (Creación), intentamos extraer el ID del cuerpo.
     try:
-      # Cargar los datos del cuerpo de la solicitud json
-      data = json.loads(request.body)
+        # Cargar los datos del cuerpo de la solicitud json
+        data = json.loads(request.body)
     except json.JSONDecodeError:
-      # Si el cuerpo no es JSON, usamos request.data
-      data = request.data
+        # Si el cuerpo no es JSON, usamos request.data
+        data = request.data
     except Exception:
-      return False # No se pudieron obtener los datos
+        return False # No se pudieron obtener los datos
 
     # LÓGICA CLAVE DE VERIFICACIÓN DE PERMISOS PARA CREACIÓN (POST):
     # 1
