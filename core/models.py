@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
-
+from django.db.models import JSONField 
 # Create your models here.
 class Place(models.Model):
   owner = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -43,10 +43,10 @@ class Order(models.Model):
   )
 
   place = models.ForeignKey(Place, on_delete=models.CASCADE)
-  table = models.CharField(max_length=2)
-  detail = models.TextField()
+  table = models.IntegerField()
+  detail = JSONField()
   payment_intent = models.CharField(max_length=255)
-  amount = models.IntegerField()
+  amount = models.FloatField()
   status = models.CharField(max_length=20, choices=STATUSES, default=PROCESSING_STATUS)
   created_at = models.DateTimeField(default=timezone.now)
 
