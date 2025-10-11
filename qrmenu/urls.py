@@ -33,4 +33,17 @@ urlpatterns = [
    # core views
    path('api/places/', views.PlaceList.as_view()),
    path('api/places/<pk>', views.PlaceDetail.as_view()),
+
+   path('api/categories/', views.CategoryList.as_view()),
+   path('api/categories/<pk>', views.CategoryDetail.as_view()),
+
+   path('api/menu_items/', views.MenuItemList.as_view()),
+   path('api/menu_items/<pk>', views.MenuItemDetail.as_view()),
+
+   path('api/create_payment_intent/', views.create_payment_intent),
+
+   path('api/orders/', views.OrderList.as_view()),
+   path('api/orders/<pk>', views.OrderDetail.as_view()),
+
+   path('', views.home),
 ]
