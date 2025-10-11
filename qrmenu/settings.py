@@ -134,3 +134,5 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     # Agregar tu dominio de producción
 ]
+
+STRIPE_API_SECRET_KEY = os.environ.get("STRIPE_API_SECRET_KEY")
